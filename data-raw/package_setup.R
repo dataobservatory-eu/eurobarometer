@@ -1,0 +1,5 @@
+usethis::use_data_raw()
+usethis::use_gpl3_license()
+usethis::use_package("dataset")
+usethis::use_package("declared")
+usethis::use_package("haven")

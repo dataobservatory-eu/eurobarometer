@@ -1,0 +1,46 @@
+---
+title: "Working with declared"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Working with declared}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(eurobarometer)
+library(here)
+library(dplyr)
+```
+
+
+The `read_sav_gesis()` function is a wrapper with [haven::read_sav](https://haven.tidyverse.org/reference/read_spss.html),  `declared:as.declared`, and [dataset::dublincore_add](https://dataset.dataobservatory.eu/reference/dublincore.html).
+
+
+```{r}
+ZA5933 <- read_sav_gesis(file = system.file("extdata", "ZA5933_sample.sav", 
+                                            package = "eurobarometer"))
+```
+
+The original, labelled survey variables are stored as `declared`.
+
+```{r}
+summary(ZA5933$d25)
+```
+The survey attributes are retained in `dataset`, which is otherwise a normal data.frame or tibble or data.table object.
+
+```{r}
+dataset::identifier(ZA5933)
+dataset::publisher(ZA5933)
+```
+
+
+
+

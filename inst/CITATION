@@ -1,0 +1,15 @@
+## R package reference generated from DESCRIPTION metadata
+## citation(auto = meta)
+
+bibentry(bibtype = "Misc",
+         title = "eurobarometer R Package: Additional Functionality for Using `retroharmonize` with Eurobarometer Surveys",
+         author = c(person(
+         given ="Daniel",
+         family = "Antal",
+         role = c("aut", "cre"),
+         comment = c(ORCID = "0000-0001-7513-6760"))
+         ),
+         year = "2022",
+         publisher = "Zenodo",
+         url = "https://eurobarometer.dataobservatory.eu/index.html",
+         doi = "10.5281/zenodo.7415826")
