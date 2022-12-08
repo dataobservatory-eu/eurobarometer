@@ -17,18 +17,13 @@ library(here)
 # eurobarometer
 
 <!-- badges: start -->
-[![dataobservatory on
-Github](https://img.shields.io/badge/github-dataobservatory.eu-6e5494.svg)](https://github.com/dataobservatory-eu/)
-[![R package
-retroharmonize](https://img.shields.io/badge/R-retroharmonize-007CBB.svg)](https://iotables.dataobservatory.eu)
-[![R package
-dataset](https://img.shields.io/badge/R-dataset-E4007F.svg)](https://dataset.dataobservatory.eu)
-[![Contributor
-Covenant](https://img.shields.io/badge/ethics-Contributor%20Covenant-680171.svg)](https://dataobservatory.eu/)
-[![Project Status: Active. The project has reached a stable, usable
-state and is being actively
-developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![dataobservatory on Github](https://img.shields.io/badge/github-dataobservatory.eu-6e5494.svg)](https://github.com/dataobservatory-eu/)
+[![R package retroharmonize](https://img.shields.io/badge/R-retroharmonize-007CBB.svg)](https://retroharmonize.dataobservatory.eu)
+[![dataset](https://img.shields.io/badge/R-dataset-E4007F.svg)](https://dataset.dataobservatory.eu)
+[![Contributor Covenant](https://img.shields.io/badge/ethics-Contributor%20Covenant-680171.svg)](https://dataobservatory.eu/)
+[![Project Status: Active. The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![license](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
+[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/dataobservatory-eu/eurobarometer?branch=main&svg=true)](https://ci.appveyor.com/project/dataobservatory-eu/eurobarometer)
 <!-- badges: end -->
 
 The goal of eurobarometer is to provide helper functions for the use of the [retroharmonize](https://retroharmonize.dataobservatory.eu/) package when working with SPSS versions of the Eurobarometer surveys files that are stored at GESIS. This package was not made, and is not affiliated with GESIS.

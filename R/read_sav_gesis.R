@@ -24,14 +24,17 @@ read_sav_gesis <- function (file) {
   potential_attributes <- c("studyno1", "studyno2", "studyno", "doi", "edition", "survey")
   potential_dimensions <- c("isocntry", "tnscountry","tnscntry", "country")
 
-  attrbs <- potential_attributes[which(potential_attributes %in% names(df))]
-  dimns <- potential_dimensions[which(potential_dimensions %in% names(gesis_sav_declared ))]
-  msrs <- names(gesis_sav_declared)[! names(gesis_sav_declared) %in% c(attrbs, dimns)]
+  #attrbs <- potential_attributes[which(potential_attributes %in% names(df))]
+  #dimns <- potential_dimensions[which(potential_dimensions %in% names(gesis_sav_declared ))]
+  #msrs <- names(gesis_sav_declared)[! names(gesis_sav_declared) %in% c(attrbs, dimns)]
+
+  doi <- get_gesis_doi(gesis_sav_declared)
 
   ds <- dataset::dublincore_add(x = df,
                                 Title = get_gesis_survey_name(gesis_sav_declared),
                                 Publisher = "GESIS",
-                                Identifier = get_gesis_doi(gesis_sav_declared))
+                                Identifier = list ( doi = doi,
+                                                    gesis_study_no = gesis_study_no))
 
   ds
 }

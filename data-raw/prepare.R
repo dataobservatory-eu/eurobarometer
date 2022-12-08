@@ -1,19 +1,29 @@
 devtools::load_all()
 gesis_dir <- "/home/antaldaniel/Documents/_data/GESIS"
 library(dplyr)
-ZA5933 <- haven::read_spss(file = file.path(gesis_dir, "ZA5933_v6-0-0.sav"))
-ZA5933_class <- map(ZA5933, class)
+ZA5933 <- read_sav_gesis(file = file.path(gesis_dir, "ZA5933_v6-0-0.sav"))
+ZA5688 <- read_sav_gesis(file = file.path(gesis_dir, "ZA5688_v6-0-0.sav"))
+
+dataset::identifier(ZA5688)
+
+cb <- ZA5688 %>%
+  select ( any_of(get_demography_schema()$var_name_orig
+)) %>%
+  codebook_create()
+
+
+attributes(ZA5688)
+
+which(declared::is.declared())
+
+iris %>%
+  group_by(Species) %>%
+  mutate(across(contains(".Width"), ~.x - mean(.x), .names = "residual_{col}")) %>%
+  mutate(across())
 
 library(purrr)
 
-ZA5933_declared <- purrr::map_df(ZA5933, declared::as.declared )
-
-names ( ZA5933_declared)
-
-dataset::dublincore(ds)
-
-
-
+mtcars %>% mutate("{var_name}" := 235 / mpg)
 
 ZA5933_declared$caseid
 ZA5933_declared$uniqid

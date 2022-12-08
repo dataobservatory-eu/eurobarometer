@@ -1,6 +1,8 @@
 Package: eurobarometer
 Title: eurobarometer R Package: Additional Functionality for Using `retroharmonize` with Eurobarometer Surveys
-Version: 0.0.1
+Version: 0.0.1.0002
+Date: 2022-12-09
+URL: https://eurobarometer.dataobservatory.eu/
 Authors@R: 
     c(person(given = "Daniel", family = "Antal", 
            email = "daniel.antal@dataobservatory.eu", 
@@ -15,11 +17,13 @@ License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.2
+Language: en-US
 Imports: 
     dataset,
     declared,
     haven,
-    magrittr
+    magrittr,
+    utils
 Suggests: 
     dplyr,
     here,
