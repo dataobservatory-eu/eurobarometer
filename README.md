@@ -17,7 +17,7 @@ Covenant](https://img.shields.io/badge/ethics-Contributor%20Covenant-680171.svg)
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![license](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
-\[ <!-- badges: end -->
+<!-- badges: end -->
 
 The goal of eurobarometer is to provide helper functions for the use of
 the [retroharmonize](https://retroharmonize.dataobservatory.eu/) package
@@ -91,5 +91,3 @@ dataset::identifier(ZA5933_sample)
 dataset::publisher(ZA5933_sample)
 #> [1] "GESIS"
 ```
-
-\`\`\`
