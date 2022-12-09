@@ -1,0 +1,60 @@
+---
+title: "Surveyharmonies experiment"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Surveyharmonies experiment}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+In the `Surveyharmonies` project, Sinus and its partners are conducting a feasibility study to produce ex ante and ex post harmonized surveys with open source tools.
+
+[Digital technologies for the data lifecycle of large-scale surveys](https://www.europeansurveyresearch.org/conf2023/sessions.php?sess=89)
+
+>This session aims to bring together those working with data dashboards and survey tools to share their experiences. We welcome presentations on tools used during the survey data lifecycle (e.g., questionnaire design, sampling, translation, data collection and data processing) from different stakeholders (fieldwork agencies, research infrastructures, academic institutes, etc.) and/or studies (national and cross-national, cross-sectional, and longitudinal, conducted in any mode).
+
+>Presentations could outline how methodological and practical issues have been addressed and show how digital technologies have an impact on survey implementation and appraisal of data quality. Presentations may also provide systematic reviews of performance indicators, monitoring dashboards, and studies testing tools.
+
+## Ex ante and retrospective harmonization
+
+1.  We create a question bank from questionnaire items and their translations which are candidates for further use.  Our starting point for practical reasons is the well-documented Eurobarometer series because it has questionnaire items available in more than 20 languages. We connect every item with the harmonized concepts of the [THESOZ Thesaurus](https://lod.gesis.org/thesoz/en/), which has several natural languages and it is partially harmonized with various further subject vocabularies. The subject harmonization helps the expansion of the question bank and the documentation of the end product.
+
+2. We create a harmonized codebook and a harmonized dataset of pre-existing survey items in our question bank.  We use the retroharmonize R package to create these codebooks and datasets. Is there a preferred format to store the question bank with various language versions?
+
+3. Working with .po and .pot files is possible in R with the [poio](https://github.com/RL10N/poio) package. The best way to store the question bank’s translations is likely in the .po format. Probably it is a good idea to store the entire question bank in this format, or, if not, in a simple structure that fits with DDI standards and can be stored to/from .po.
+
+4. The [retroharmonize](https://retroharmonize.dataobservatory.eu/) package uses two notable dependencies, _declared_ ^[If Adrian approves, we should set up a pkgdown website similarly to [retroharmonize](https://retroharmonize.dataobservatory.eu/) and [dataset](https://dataset.dataobservatory.eu/) for easier readability when cross-linking package documentation] and [dataset](https://dataset.dataobservatory.eu/).  The declared package provides a better R object class for labelled social sciences surveys than the generally used labelled and haven packages^[We should increase the readability of all package articles (‘vignettes’)  and cross-reference them.].  The [dataset](https://dataset.dataobservatory.eu/) package provides extensions to data frames to record all important lifecycle metadata during production in R objects.
+
+5. For each survey program that we use for retrospective harmonization, we create a helper package, for example, the eurobarometer R package for the Eurobarometer survey program. This package contains pre-sets and documentation data to help scale the use of retroharmonize.  For example, it connects questionnaire items to IC and GESIS.
+
+6. The harmonized datasets are made available in SPSS, CSV and native R RDS format. Their documentation is made available following the DDI Codebook specifications with DDIwR. The `convert()` function of DDIwR should be improved, and potentially changed to fit into the workflow^[How could the aims of DDIwR and retroharmonize be reconciled [See codebook example](https://eurobarometer.dataobservatory.eu/articles/codebooks.html) with compatible codebooks and crosswalk schemas (that create correspondence tables among original and newly harmonized codebooks.)].
+
+## Fieldwork
+
+7. The question bank items are loaded into an online survey software (at this stage, we do not yet intend to create CAPI or CATI surveys.)  At this point, we do not see an obvious candidate to do this, and we do manual editing^[Online survey tool: any ideas how to make this reproducible?].  Google Form is very simple and could be a low-cost solution for simple questionnaires, and it can be programmatically set up, but no such connector has been written so far in the R language. The [shinysurveys](https://cran.r-project.org/web/packages/shinysurveys/vignettes/surveying-shinysurveys.html) is an abandoned, semi-finished work that would allow a native, R-based online survey tool. It would require funding.
+
+8. At this point, we use SurveyMonkey and Google Forms for testing.  SurveyMonkey can handle the multi-language data entry and supports standard `.po` files for translations, while in Google Form, each language form has to be set up as a separate survey. 
+
+9. The data retrieved from the new, ex-ante harmonized survey is then retrospectively harmonized back with the harmonized datasets with retroharmonize. Then the resulting new dataset is documented with DDIwR. SurveyMonkey and Google Forms produce tabular CSV formats, but they are differently formatted, particularly because SurveyMonkey has some structured questionnaire formats like matrix dropdown menus. Each surveying engine and question type requires a bit of data wrangling adjustment, so we cannot support an arbitrary number of platforms.
+
+## Miscellaneous
+
+The ICPSR and GESIS maintain a web service where the individual questionnaire variables are documented.  Our codebooks should connect to them because they offer manual and automated cross-checking for our results[^Can we get a better access than web scraping to the GESIS variable documentation ([d8 on GESIS](https://search.gesis.org/variables/exploredata-ZA5688_Vard8)) for cross-checking with our results?]. See for example:
+_Eurobarometer 82.4: The European Parliament, Autonomous Systems, Gender Equality, and Smoking Habits, November-December 2014_
+
+- [d8 on ICPSR](https://www.icpsr.umich.edu/web/ICPSR/studies/36664/datasets/0001/variables/D8?archive=icpsr). Please not that ICPSR has a coding error that is immediately visible. However, the 73 `refusal` answers could be used for cross-checking.
+
+- [d8 on GESIS](https://search.gesis.org/variables/exploredata-ZA5688_Vard8) is less useful for us. It is good for documentation purposes, but it offers no validation points.
+
+## Open questions:
+
+
+
+
