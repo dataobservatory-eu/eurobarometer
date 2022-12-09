@@ -1,0 +1,71 @@
+---
+title: "Working with codebooks"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Working with codebooks}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(eurobarometer)
+library(here)
+library(dplyr)
+```
+
+
+The `read_sav_gesis()` function is a wrapper with [haven::read_sav](https://haven.tidyverse.org/reference/read_spss.html),  `declared:as.declared`, and [dataset::dublincore_add](https://dataset.dataobservatory.eu/reference/dublincore.html).
+
+
+```{r read-example-file}
+ZA5933 <- read_sav_gesis(file = system.file("extdata", "ZA5933_sample.sav", 
+                                            package = "eurobarometer"))
+```
+
+The `read_sav_gesis` read in the file into `declared` class.
+
+```{r}
+demography_vars <- get_demography_schema() 
+```
+
+Let us convert any variables where labelling plays no role to a simpler class. In this case, we will convert the `id` variable to a character vector, and the `d11` (AGE EXACT) variable into a numeric.
+
+```{r}
+demography <-ZA5933 %>%
+  select( any_of( demography_vars$var_name_orig )) %>%
+  mutate ( ## convert to numeric with keeping var_label
+    across
+    (demography_vars$var_name_orig[which(demography_vars$class_target == "numeric")], as_numeric)
+  ) %>%
+  mutate ( ## convert to character with keeping var_label
+    across
+    (demography_vars$var_name_orig[which(demography_vars$class_target == "character")], as.character)
+  ) %>%
+  mutate ( ## do the same with targetted factor variables (none in this example) 
+    across
+    (demography_vars$var_name_orig[which(demography_vars$class_target == "factor")], as.factor)
+  ) 
+```
+
+It is unclear to me what happens here. Neither the documenation specifies the outcome, nor I do not see anything happening.
+
+```{r}
+library(DDIwR)
+convert(demography, to = "DDI", embed=TRUE)
+```
+
+
+```{r}
+library(knitr)
+library(kableExtra)
+var_code_table(demography, "d7") %>%
+  kbl()
+```
+
