@@ -9,6 +9,7 @@
 #' @importFrom declared as.declared
 #' @importFrom dataset dublincore_add
 #' @importFrom fs path_file
+#' @importFrom DDIwR convert
 #' @export
 #' @examples
 #' \donttest{
@@ -17,10 +18,9 @@
 #'
 
 read_sav_gesis <- function (file) {
-  gesis_sav <- haven::read_sav(file)
-  message("File: ", file, " successfully read.")
-
-  gesis_sav_declared <- as.data.frame(lapply(gesis_sav, declared::as.declared))
+  gesis_sav_declared <- DDIwR::convert(file)
+  #gesis_sav <- haven::read_sav(file)
+  #gesis_sav_declared <- as.data.frame(lapply(gesis_sav, declared::as.declared))
   #gesis_sav_declared <- purrr::map_df(gesis_sav, declared::as.declared)
   gesis_study_no     <- get_gesis_study_id(gesis_sav_declared)
   df <- id_add(gesis_sav_declared, gesis_study_id=gesis_study_no)
@@ -33,11 +33,12 @@ read_sav_gesis <- function (file) {
   #msrs <- names(gesis_sav_declared)[! names(gesis_sav_declared) %in% c(attrbs, dimns)]
 
   doi <- get_gesis_doi(gesis_sav_declared)
+  title <- get_gesis_survey_name(gesis_sav_declared)
 
 
   ds <- dataset::dataset(df,
-                         Title = get_gesis_survey_name(gesis_sav_declared),
-                         Attributes = potential_attributes[potential_attributes %in% names(x)],
+                         Title = title,
+                         Attributes = potential_attributes[potential_attributes %in% names(df)],
                          Publisher = "GESIS",
                          Identifier = list ( doi = doi))
   attr(ds, "RelatedIdentifier") <-list ( gesis_study_no = gesis_study_no)

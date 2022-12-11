@@ -38,8 +38,7 @@ devtools::install_github("dataobservatory-eu/eurobarometer")
 
 ## Work with GESIS survey datasets
 
-The `read_sav_gesis()` function is a wrapper with
-[haven::read_sav](https://haven.tidyverse.org/reference/read_spss.html)
+The `read_sav_gesis()` function is a wrapper with `DDIwR::convert()`
 with the following modifications:
 
 ``` r
@@ -48,7 +47,8 @@ ZA5933 <- read_sav_gesis(file = system.file("extdata", "ZA5933_sample.sav",
                                             package = "eurobarometer"))
 ```
 
--   The original, labelled survey variables are stored as `declared`,
+-   The original, labelled survey variables are stored as
+    [declared](https://declared.dataobservatory.eu/reference/declared.html),
     which has many advantages compared to the labelled class used by
     haven.
 -   The study-level metadata is added as metadata to the data.frame with
@@ -65,14 +65,14 @@ easier.
 
 ``` r
 ZA5933_sample$d25_num
-#>  [1] 3 3 1 1 2 1 3 1 2 1 1 1
+#>  [1] 2 1 3 3 2 2 1 2 1 2 1 3
 ZA5933_sample$d25_chr
-#>  [1] "Large town"                 "Large town"                
-#>  [3] "Rural area or village"      "Rural area or village"     
-#>  [5] "Small or middle sized town" "Rural area or village"     
-#>  [7] "Large town"                 "Rural area or village"     
-#>  [9] "Small or middle sized town" "Rural area or village"     
-#> [11] "Rural area or village"      "Rural area or village"
+#>  [1] "Small or middle sized town" "Rural area or village"     
+#>  [3] "Large town"                 "Large town"                
+#>  [5] "Small or middle sized town" "Small or middle sized town"
+#>  [7] "Rural area or village"      "Small or middle sized town"
+#>  [9] "Rural area or village"      "Small or middle sized town"
+#> [11] "Rural area or village"      "Large town"
 ```
 
 ## Advantages of dataset
@@ -84,11 +84,62 @@ stages of the survey lifecycle.
 
 ``` r
 library(dataset)
-attr(ZA5933_sample, "Title")
-#>                                         Title titleType
-#> 1 Eurobarometer 82.4 (November-December 2014)     Title
-dataset::identifier(ZA5933_sample)
+ZA5933_sample
+#> Eurobarometer 82.4 (November-December 2014) (subset) (subset) [doi:10.4232/1.13044] 
+#> Published by GESIS
+#>                 id   uniqid d25 d25_num                    d25_chr
+#> 1  za5933_46001088 46001088   2       2 Small or middle sized town
+#> 2  za5933_42000703 42000703   1       1      Rural area or village
+#> 3  za5933_32000989 32000989   3       3                 Large town
+#> 4  za5933_12001054 12001054   3       3                 Large town
+#> 5  za5933_35000877 35000877   2       2 Small or middle sized town
+#> 6  za5933_40002682 40002682   2       2 Small or middle sized town
+#> 7   za5933_7001327  7001327   1       1      Rural area or village
+#> 8  za5933_36003657 36003657   2       2 Small or middle sized town
+#> 9  za5933_35001629 35001629   1       1      Rural area or village
+#> 10 za5933_22086838 22086838   2       2 Small or middle sized town
+#> 
+#> ... 2 further observations.
+```
+
+``` r
+attributes(ZA5933_sample)
+#> $names
+#> [1] "id"      "uniqid"  "d25"     "d25_num" "d25_chr"
+#> 
+#> $row.names
+#>  [1]  1  2  3  4  5  6  7  8  9 10 11 12
+#> 
+#> $class
+#> [1] "dataset"    "data.frame"
+#> 
+#> $Title
+#> $Title$Title
+#> [1] "Eurobarometer 82.4 (November-December 2014) (subset) (subset)"
+#> 
+#> 
+#> $Identifier
+#> $Identifier$doi
 #> [1] "doi:10.4232/1.13044"
-dataset::publisher(ZA5933_sample)
+#> 
+#> 
+#> $Publisher
 #> [1] "GESIS"
+#> 
+#> $Type
+#> $Type$resourceType
+#> [1] "DCMITYPE:Dataset"
+#> 
+#> $Type$resourceTypeGeneral
+#> [1] "Dataset"
+#> 
+#> 
+#> $Description
+#> [1] NA
+#> 
+#> $Size
+#> [1] "7.01 kB [6.84 KiB]"
+#> 
+#> $Date
+#> [1] "2022-12-11"
 ```
