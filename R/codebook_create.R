@@ -42,14 +42,12 @@ var_code_table <- function(df, var_name) {
          var_name, "' is not among names(df).")
   }
 
-
   if(declared::is.declared(df[[var_name]])){
     ## var is of type 'declared'
     var_labelling <- labels(df[[var_name]])
     df_rows <- length(var_labelling)
-
     data.frame(
-      survey = rep(identifier$gesis_study_no, df_rows),
+      survey = rep(as.character(unlist(identifier)), df_rows),
       var_name_orig = rep(var_name, df_rows),
       var_label_orig =  rep(attr(df[[var_name]], "label"), df_rows),
       val_code_orig = as.integer(labels(df[[var_name]])),
@@ -60,7 +58,7 @@ var_code_table <- function(df, var_name) {
     var_label = ifelse(is.null(attr(df[[var_name]], "label")),
                        yes = NA_character_, no = attr(df[[var_name]], "label"))
     data.frame(
-      survey = identifier$gesis_study_no,
+      survey = as.character(unlist(identifier)),
       var_name_orig = var_name,
       var_label_orig =  var_label,
       val_code_orig = NA_integer_,

@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
+```{r setup, message=FALSE}
 library(eurobarometer)
 library(here)
 library(dplyr)
@@ -49,24 +49,32 @@ demography <-ZA5933 %>%
     across
     (demography_vars$var_name_orig[which(demography_vars$class_target == "character")], as.character)
   ) %>%
-  mutate ( ## do the same with targetted factor variables (none in this example) 
+  mutate ( ## do the same with targeted factor variables (none in this example) 
     across
     (demography_vars$var_name_orig[which(demography_vars$class_target == "factor")], as.factor)
   ) 
 ```
 
-It is unclear to me what happens here. Neither the documenation specifies the outcome, nor I do not see anything happening.
+It is unclear to me what happens here. Neither the documentation specifies the outcome, nor I do not see anything happening.
 
 ```{r}
 library(DDIwR)
-convert(demography, to = "DDI", embed=TRUE)
+DDI_demograpy <- convert(demography, to = "DDI", embed=TRUE)
+print(DDI_demograpy)
 ```
 
 
-```{r}
+```{r, results='asis', message=FALSE}
 library(knitr)
 library(kableExtra)
-var_code_table(demography, "d7") %>%
-  kbl()
+var_code_table(df = demography, var_name = "d7") %>%
+  #mutate (var_name_orig = cell_spec(.data$var_name_orig, align="c")) %>%
+  kbl( align = c(rep("c",4), "l")) %>%
+  kable_paper(full_width = F, font_size = 10) %>%
+  add_header_above(c("id" = 1, "variable properies" = 2, "value properties" = 2)) %>%
+  column_spec(1, bold = F, border_right = T, width = "2.5em") %>%
+  column_spec(2:4, bold = F, width = "2.5em")  %>%
+  column_spec(3, border_right = T)  %>%
+  column_spec(5, border_right=T)
 ```
 
