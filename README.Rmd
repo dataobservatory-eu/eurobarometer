@@ -37,6 +37,8 @@ You can install the development version of eurobarometer from [GitHub](https://g
 devtools::install_github("dataobservatory-eu/eurobarometer")
 ```
 
+You will also need similarly `devtools::install_github("dataobservatory-eu/dataset")` (at least version 0.1.9.0004) and the latest version of declared.
+
 ## Work with GESIS survey datasets
 
 The `read_sav_gesis()` function is a wrapper with `DDIwR::convert()` with the following modifications:

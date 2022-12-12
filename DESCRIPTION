@@ -1,8 +1,8 @@
 Package: eurobarometer
 Title: eurobarometer R Package: Additional Functionality for Using `retroharmonize` 
     with Eurobarometer Surveys
-Version: 0.0.1.0004
-Date: 2022-12-11
+Version: 0.0.1.0005
+Date: 2022-12-12
 URL: https://eurobarometer.dataobservatory.eu/
 Authors@R: 
     c(person(given = "Daniel", family = "Antal", 
@@ -14,6 +14,7 @@ Authors@R:
 Description: The goal of eurobarometer is to provide helper functions for the 
     use of the `retroharmonize` package when working with SPSS versions of the 
     Eurobarometer surveys files that are stored at GESIS.
+BugReports: https://github.com/dataobservatory-eu/eurobarometer/issues
 License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

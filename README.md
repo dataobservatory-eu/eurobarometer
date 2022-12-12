@@ -36,6 +36,10 @@ You can install the development version of eurobarometer from
 devtools::install_github("dataobservatory-eu/eurobarometer")
 ```
 
+You will also need similarly
+`devtools::install_github("dataobservatory-eu/dataset")` (at least
+version 0.1.9.0004) and the latest version of declared.
+
 ## Work with GESIS survey datasets
 
 The `read_sav_gesis()` function is a wrapper with `DDIwR::convert()`
@@ -141,5 +145,5 @@ attributes(ZA5933_sample)
 #> [1] "7.01 kB [6.84 KiB]"
 #> 
 #> $Date
-#> [1] "2022-12-11"
+#> [1] "2022-12-12"
 ```
