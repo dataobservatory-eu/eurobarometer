@@ -4,15 +4,15 @@
 \alias{read_sav_gesis}
 \title{Read a GESIS .sav File}
 \usage{
-read_sav_gesis(file, id_var = NULL)
+read_sav_gesis(file, gesis_study_id = NULL, id_var = NULL)
 }
 \arguments{
 \item{file}{See \code{\link[haven:read_sav]{read_sav}}.}
 
+\item{gesis_study_id}{The GESIS study number in ZA5933 format.}
+
 \item{id_var}{The unqiue id of the survey. Defaults to \code{NULL}, when
 the functions tries to guess the unique ID.}
-
-\item{gesis_study_id}{The GESIS study number in ZA5933 format.}
 }
 \description{
 A wrapper around \code{\link[haven:read_sav]{read_sav}}.

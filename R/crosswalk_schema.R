@@ -7,7 +7,7 @@
 get_demography_schema <- function(){
   tibble::tribble(
     ~var_name_orig, ~var_name_target, ~class_target,
-    "id", "id", "character",
+    "uri", "uri", "character",
     "d11",  "age_exact", "numeric",
     "d25",  "eb_type_community", "declared",
     "d7",   "marital_status", "declared",

@@ -1,0 +1,30 @@
+---
+title: "Codebook"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Codebook}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r settings, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(eurobarometer)
+```
+
+```{r read-sav-gesis}
+sample_data <- read_sav_gesis(
+  file = system.file("extdata", "ZA5933_sample.sav",
+                     package = "eurobarometer"))
+```
+
+```{r codebook}
+codebook_create(sample_data[, c("d25", "d60")], freq = TRUE)
+```
+

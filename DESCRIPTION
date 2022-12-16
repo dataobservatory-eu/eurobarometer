@@ -1,7 +1,7 @@
 Package: eurobarometer
 Title: eurobarometer R Package: Additional Functionality for Using `retroharmonize` 
     with Eurobarometer Surveys
-Version: 0.0.1.0006
+Version: 0.0.1.0007
 Date: 2022-12-16
 URL: https://eurobarometer.dataobservatory.eu/
 Authors@R: 
@@ -24,12 +24,15 @@ Imports:
     dataset,
     DDIwR,
     declared,
+    dplyr,
     fs,
     haven,
     magrittr,
+    purrr,
+    rlang,
+    tibble,
     utils
 Suggests: 
-    dplyr,
     here,
     knitr,
     rmarkdown,

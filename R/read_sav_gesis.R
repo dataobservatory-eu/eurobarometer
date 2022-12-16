@@ -19,7 +19,7 @@
 #' }
 #'
 
-read_sav_gesis <- function (file, id_var = NULL) {
+read_sav_gesis <- function (file, gesis_study_id = NULL, id_var = NULL) {
   # gesis_sav_declared <- DDIwR::convert(file)
   gesis_sav <- haven::read_sav(file)
   gesis_sav_declared <- as.data.frame(lapply(gesis_sav, declared::as.declared))
@@ -77,6 +77,9 @@ get_gesis_study_id <- function(x) {
   }
 }
 
+#' @title Get the DOI of a GESIS survey file.
+#' @param x A survey.
+#' @param zacat_id The ZACAT collection ID.
 #' @keywords internal
 get_gesis_doi <- function(x, zacat_id=NULL) {
   if ("studyno1" %in% names(x)) {
@@ -91,6 +94,9 @@ get_gesis_doi <- function(x, zacat_id=NULL) {
   }
 }
 
+#' @title Get the survey title for a GESIS survey file.
+#' @param x A survey.
+#' @param zacat_id The ZACAT collection ID.
 #' @keywords internal
 get_gesis_survey_name <- function(x, zacat_id=NULL){
   if ("survey" %in% names(x)) {
@@ -106,11 +112,15 @@ get_gesis_survey_name <- function(x, zacat_id=NULL){
 }
 
 #' @importFrom fs path_file
+#' @inheritParams read_sav_gesis
 #' @keywords internal
 get_gesis_survey_id <- function(file) {
   substr(fs::path_file(file), 1,6)
 }
 
+#' @title Find the variable that contains the unique case ID.
+#' @param df A survey data frame.
+#' @inheritParams read_sav_gesis
 #' @keywords internal
 survey_unique_id_var_name <- function(df, file, id_var) {
 

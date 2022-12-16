@@ -5,7 +5,8 @@
 #' @param df A dataset.
 #' @param gesis_study_id The GESIS study number in ZA5933 format.
 #' @importFrom tibble tribble
-#' @importFrom dplyr relocate mutate
+#' @importFrom dplyr relocate mutate everything
+#' @importFrom rlang .data
 #' @examples
 #' df1 <- data.frame(
 #'          uniqid = c(1001,1002,1003),

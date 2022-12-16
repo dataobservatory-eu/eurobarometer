@@ -4,12 +4,12 @@ sample_data <- read_sav_gesis(
 
 df <- sample_data
 var_code_table(df, var_name = "d60", freq = TRUE)
-names(df)
 cb <- codebook_create(df)
+
 
 test_that("var_code_table()", {
   expect_equal(var_code_table(df, var_name = "d25")$survey
-, rep("ZA5933", 4))
+, rep("doi:10.4232/1.13044", 4))
 })
 
 test_that("codebook_create()", {

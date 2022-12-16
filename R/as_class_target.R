@@ -7,7 +7,7 @@
 #' @return A survey dataset with the variables converted according to the
 #' \code{class_target} column of the crosswalk schema.
 #' @importFrom declared as.declared
-#' @importFrom dplyr mutate
+#' @importFrom dplyr mutate across any_of
 #' @examples
 #' sample_data <- read_sav_gesis(
 #'   file = system.file("extdata", "ZA5933_sample.sav",
