@@ -3,8 +3,8 @@ x <- declared(
   labels = c(Good = 1, Bad = 5, DK = -1),
   na_values = -1
  )
- attr(x, "label") <- "Example"
 
+attr(x, "label") <- "Example"
 
 test_that("as_factor() works", {
   expect_equal(attr(as_factor(x), "label"), "Example" )
