@@ -5,17 +5,32 @@
 \alias{var_code_table}
 \title{Create a codebook for a survey or a survey variable}
 \usage{
-codebook_create(df)
+codebook_create(df, var_labels = TRUE, val_labels = TRUE, freq = FALSE)
 
-var_code_table(df, var_name)
+var_code_table(
+  df,
+  var_name,
+  var_labels = TRUE,
+  val_labels = TRUE,
+  freq = FALSE
+)
 }
 \arguments{
 \item{df}{A survey dataset}
 
+\item{var_labels}{Should the variable labels be included in the codebook?
+Defaults to \code{TRUE}.}
+
+\item{val_labels}{Should the value labels be included in the codebook?
+Defaults to \code{TRUE}.}
+
+\item{freq}{Should a label frequency table be included in the codebook?
+Defaults to \code{FALSE.}}
+
 \item{var_name}{A variable name in df}
 }
 \value{
-A data frame containing the original survey identifier,
+A dataset (data frame) containing the original survey identifier,
 the variable names, the variable and value labels.
 }
 \description{
@@ -31,5 +46,5 @@ file = system.file("extdata", "ZA5933_sample.sav",
                    package = "eurobarometer"))
 
 var_code_table(sample_data, "d7")
-codebook_create(sample_data[, c("d25", "d60")])
+codebook_create(sample_data[, c("d25", "d60")], freq=TRUE)
 }
