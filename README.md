@@ -88,20 +88,25 @@ stages of the survey lifecycle.
 
 ``` r
 library(dataset)
+#> 
+#> Attaching package: 'dataset'
+#> The following object is masked from 'package:base':
+#> 
+#>     as.data.frame
 ZA5933_sample
 #> Eurobarometer 82.4 (November-December 2014) (subset) (subset) [doi:10.4232/1.13044] 
 #> Published by GESIS
-#>                 id   uniqid d25 d25_num                    d25_chr
-#> 1  za5933_46001088 46001088   2       2 Small or middle sized town
-#> 2  za5933_42000703 42000703   1       1      Rural area or village
-#> 3  za5933_32000989 32000989   3       3                 Large town
-#> 4  za5933_12001054 12001054   3       3                 Large town
-#> 5  za5933_35000877 35000877   2       2 Small or middle sized town
-#> 6  za5933_40002682 40002682   2       2 Small or middle sized town
-#> 7   za5933_7001327  7001327   1       1      Rural area or village
-#> 8  za5933_36003657 36003657   2       2 Small or middle sized town
-#> 9  za5933_35001629 35001629   1       1      Rural area or village
-#> 10 za5933_22086838 22086838   2       2 Small or middle sized town
+#>      uniqid d25 d25_num                    d25_chr
+#> 1  46001088   2       2 Small or middle sized town
+#> 2  42000703   1       1      Rural area or village
+#> 3  32000989   3       3                 Large town
+#> 4  12001054   3       3                 Large town
+#> 5  35000877   2       2 Small or middle sized town
+#> 6  40002682   2       2 Small or middle sized town
+#> 7   7001327   1       1      Rural area or village
+#> 8  36003657   2       2 Small or middle sized town
+#> 9  35001629   1       1      Rural area or village
+#> 10 22086838   2       2 Small or middle sized town
 #> 
 #> ... 2 further observations.
 ```
@@ -109,7 +114,7 @@ ZA5933_sample
 ``` r
 attributes(ZA5933_sample)
 #> $names
-#> [1] "id"      "uniqid"  "d25"     "d25_num" "d25_chr"
+#> [1] "uniqid"  "d25"     "d25_num" "d25_chr"
 #> 
 #> $row.names
 #>  [1]  1  2  3  4  5  6  7  8  9 10 11 12
@@ -142,8 +147,8 @@ attributes(ZA5933_sample)
 #> [1] NA
 #> 
 #> $Size
-#> [1] "7.01 kB [6.84 KiB]"
+#> [1] "5.22 kB [5.1 KiB]"
 #> 
 #> $Date
-#> [1] "2022-12-12"
+#> [1] "2022-12-16"
 ```

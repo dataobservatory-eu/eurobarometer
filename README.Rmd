@@ -80,7 +80,7 @@ The use of `dataset` helps to retain dataset-level metadata, which is critically
 library(dataset)
 ZA5933_sample
 ```
-```{r}
+```{r attributes}
 attributes(ZA5933_sample)
 ```
 
