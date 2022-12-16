@@ -4,7 +4,7 @@
 \alias{read_sav_gesis}
 \title{Read a GESIS .sav File}
 \usage{
-read_sav_gesis(file)
+read_sav_gesis(file, id_var = NULL)
 }
 \arguments{
 \item{file}{See \code{\link[haven:read_sav]{read_sav}}.}
