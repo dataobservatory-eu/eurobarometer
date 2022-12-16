@@ -9,6 +9,9 @@ read_sav_gesis(file, id_var = NULL)
 \arguments{
 \item{file}{See \code{\link[haven:read_sav]{read_sav}}.}
 
+\item{id_var}{The unqiue id of the survey. Defaults to \code{NULL}, when
+the functions tries to guess the unique ID.}
+
 \item{gesis_study_id}{The GESIS study number in ZA5933 format.}
 }
 \description{

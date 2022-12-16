@@ -4,12 +4,14 @@
 #'
 #' @param file See \code{\link[haven:read_sav]{read_sav}}.
 #' @param gesis_study_id The GESIS study number in ZA5933 format.
+#' @param id_var The unqiue id of the survey. Defaults to \code{NULL}, when
+#' the functions tries to guess the unique ID.
 #' @importFrom haven read_sav
 #' @importFrom purrr map_df
 #' @importFrom declared as.declared
-#' @importFrom dataset dublincore_add
 #' @importFrom fs path_file
 #' @importFrom DDIwR convert
+#' @importFrom dataset related_item dataset dublincore_add
 #' @export
 #' @examples
 #' \donttest{

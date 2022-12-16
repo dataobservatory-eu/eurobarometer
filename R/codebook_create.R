@@ -14,6 +14,8 @@
 #' the variable names, the variable and value labels.
 #' @importFrom purrr reduce
 #' @importFrom declared is.declared
+#' @importFrom dplyr left_join
+#' @importFrom dataset dataset related_item
 #' @examples
 #' sample_data <- read_sav_gesis(
 #' file = system.file("extdata", "ZA5933_sample.sav",
