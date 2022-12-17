@@ -1,0 +1,50 @@
+---
+title: "Installation Guide"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Installation Guide}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+Because `eurobarometer` is in an early development phase, you cannot install it from CRAN with the `install.packages("eurobarometer")` command yet. You can install the development version of `eurobarometer` from [GitHub](https://github.com/dataobservatory-eu/eurobarometer) with `devtools`. 
+
+For installing a not-yet-released package, you not only need R to be installed on your computer, but must be able to build packages from source (those that need compilation of C/C++ or Fortran code).  
+
+- On Ubuntu, you need to install _r-base-dev_ with `sudo apt-get install r-base-dev`, see [further information](https://cran.r-project.org/bin/linux/ubuntu/fullREADME.html).
+
+- On Windows install the latest version of  [Rtools](https://cran.r-project.org/bin/windows/Rtools/).
+
+- On Mac install from Terminal _Xcode_ with `xcode-select --install`.
+
+Once you can work with development version packages, run `install.packages("devtools")`.
+
+If `devools` is correctly installed on your computer, you can install `eurobarometer`:
+
+``` r
+devtools::install_github("dataobservatory-eu/eurobarometer")
+```
+
+You need to install the dependencies together with their dependencies:
+
+```{r, eval=FALSE}
+install.packages(c("dataset", "declared", "retroharmonize", "DDIwR"))
+```
+
+
+To install the latest development version of _DDIwR_ (not needed for this version of _eurobarometer_): 
+
+```{r, eval=FALSE}
+devtools::install_github("dusadrian/DDIwR")
+```
+
+
+Back to [README](https://eurobarometer.dataobservatory.eu/).
+

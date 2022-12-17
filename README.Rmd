@@ -28,23 +28,24 @@ library(here)
 
 The goal of eurobarometer is to provide helper functions for the use of the [retroharmonize](https://retroharmonize.dataobservatory.eu/) package when working with SPSS versions of the Eurobarometer surveys files that are stored at GESIS. This package was not made, and is not affiliated with GESIS.
 
+Currently `eurobarometer` can be seen as a development version of the [retroharmonize](https://retroharmonize.dataobservatory.eu/) pacakge. Some important functions of retroharmonized are being modernized with new dependencies: a new questionbank, [DDIwR](https://eurobarometer.dataobservatory.eu/articles/dependencies.html), [dataset](https://dataset.dataobservatory.eu/) and [declared](https://declared.dataobservatory.eu/). After thorough testing, most of these functions will be moved back to _retroharmonize_.  Eurobarometer will remain a helper package to use _retroharmonize_ with Eurobarometer surveys. It will serve as a template for similar works with other survey programs, for example, _Afrobarometer_. 
+
+
+## Overview
+
+- [Articles](https://eurobarometer.dataobservatory.eu/articles/index.html) on the package website.
+- [Function reference](https://eurobarometer.dataobservatory.eu/docs/reference/index.html).
+
 ## Installation
 
-Because `eurobarometer` is in an early development phase, you cannot install it from CRAN with the `install.packages("eurobarometer")` command yet. For installing a not-yet-released package, you not only need R to be installed on your computer, but must be able to build packages from source (those that need compilation of C/C++ or Fortran code).  
-- On Ubuntu, you need to install _r-base-dev_ with `sudo apt-get install r-base-dev`, see [further information](https://cran.r-project.org/bin/linux/ubuntu/fullREADME.html).
-- On Windows install the latest version of  [Rtools](https://cran.r-project.org/bin/windows/Rtools/)
-- On Mac install from Terminal _Xcode_ with `xcode-select --install`.
-
-Once you can work with development version packages, run `install.packages("devtools")`.
-
-You can install the development version of eurobarometer from [GitHub](https://github.com/) with:
+Because `eurobarometer` is in an early development phase, you cannot install it from CRAN with the `install.packages("eurobarometer")` command yet. You can install the development version of `eurobarometer` from [GitHub](https://github.com/dataobservatory-eu/eurobarometer) with `devtools`.  If you have not used devtools yet, please refer to the [Installation Guide](https://eurobarometer.dataobservatory.eu/articles/installation.html) vignette:
 
 ``` r
 # install.packages("devtools")
 devtools::install_github("dataobservatory-eu/eurobarometer")
 ```
 
-## Work with GESIS survey datasets
+## Import Surveys
 
 The `read_sav_gesis()` function is a wrapper with `DDIwR::convert()` with the following modifications:
 
@@ -54,38 +55,30 @@ ZA5933 <- read_sav_gesis(file = system.file("extdata", "ZA5933_sample.sav",
                                             package = "eurobarometer"))
 ```
 
-- The original, labelled survey variables are stored as [declared](https://declared.dataobservatory.eu/reference/declared.html), which has many advantages compared to the labelled class used by haven.
-- The study-level metadata is added as metadata to the data.frame with [dataset::dublincore_add](https://dataset.dataobservatory.eu/reference/dublincore.html).
-- A truly unique identifier is added to the dataset. GESIS's `uniqid` identifier is designed to be unique within one _wave_ of Eurobarometer surveys.  To avoid identification duplication, retroharmonize adds an `id` to each row.
+## Work with Codebooks
 
-```{r small-sample, echo=FALSE, message=FALSE}
-library(dplyr)
-set.seed(1234)
-ZA5933_sample <-ZA5933 %>%
-  select ( any_of(c("id", "uniqid", "d25"))) %>%
-  sample_n(12) %>%
-  mutate ( d25_num = as.numeric(.data$d25), 
-           d25_chr = as.character(.data$d25))
+```{r}
+codebook_create(ZA5933[, c("d25", "d60")], 
+                val_labels = TRUE, 
+                freq = TRUE)
 ```
 
-## Advantages of declared
+For further details, see [Codebooks with retroharmonize](https://eurobarometer.dataobservatory.eu/articles/codebook.html) and 
+[Eurobarometer Question Bank & Basic Code Table](https://eurobarometer.dataobservatory.eu/articles/questionbank.html) vignettes.
 
-The use of declared makes type conversions (and recoding, relabelling) easier.
+## Harmonization with Crosswalk Tables
 
-```{r declared-class}
-ZA5933_sample$d25_num
-ZA5933_sample$d25_chr
-```
+For further details, see [Harmonize Surveys with Crosswalk Tables](https://eurobarometer.dataobservatory.eu/articles/crosswalk.html) vignette.
 
-## Advantages of dataset
 
-The use of `dataset` helps to retain dataset-level metadata, which is critically important when we will combine datasets of different Eurobarometer survey waves, or make other interventions in the various stages of the survey lifecycle.
+## Archivation
 
-```{r dataset-metadata}
-library(dataset)
-ZA5933_sample
-```
-```{r attributes}
-attributes(ZA5933_sample)
-```
+For further details, see [DDI Codebooks with DDIwR](https://eurobarometer.dataobservatory.eu/articles/DDIwR.html) vignette.
 
+## Reviewability & Unit Testing
+
+The human peer-review of output from many surveys is very difficult due to the high dimensionality of the harmonized survey datasets. We would like to support review with several forms of unit testing and automation.  See [Reviewability & Unit Testing](https://eurobarometer.dataobservatory.eu/articles/testing.html) for further details.
+
+## Under the Hood
+
+For further details, see [Dependencies: Other R packages Used](https://eurobarometer.dataobservatory.eu/articles/dependencies.html) vignette.

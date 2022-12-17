@@ -1,8 +1,8 @@
 ---
-title: "Codebook"
+title: "Codebooks with retroharmonize"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Codebook}
+  %\VignetteIndexEntry{Codebooks with retroharmonize}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

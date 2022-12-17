@@ -1,0 +1,64 @@
+---
+title: "Dependencies: Other R packages Used"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Dependencies: Other R packages Used}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(eurobarometer)
+```
+
+The `read_sav_gesis()` function is a wrapper with `DDIwR::convert()` with the following modifications:
+
+```{r read-file}
+ZA5933 <- read_sav_gesis(file = system.file("extdata", "ZA5933_sample.sav", 
+                                            package = "eurobarometer"))
+```
+
+- The original, labelled survey variables are stored as [declared](https://declared.dataobservatory.eu/reference/declared.html), which has many advantages compared to the labelled class used by haven.
+- The study-level metadata is added as metadata to the data.frame with [dataset::dublincore_add](https://dataset.dataobservatory.eu/reference/dublincore.html).
+- A truly unique identifier is added to the dataset. GESIS's `uniqid` identifier is designed to be unique within one _wave_ of Eurobarometer surveys.  To avoid identification duplication, retroharmonize adds an `id` to each row.
+
+```{r small-sample, echo=FALSE, message=FALSE}
+library(dplyr)
+set.seed(1234)
+ZA5933_sample <-ZA5933 %>%
+  select ( any_of(c("id", "uniqid", "d25"))) %>%
+  sample_n(12) %>%
+  mutate ( d25_num = as.numeric(.data$d25), 
+           d25_chr = as.character(.data$d25))
+```
+
+## Advantages of declared
+
+The use of declared makes type conversions (and recoding, relabelling) easier.
+
+```{r declared-class}
+ZA5933_sample$d25_num
+ZA5933_sample$d25_chr
+```
+
+## Advantages of dataset
+
+The use of `dataset` helps to retain dataset-level metadata, which is critically important when we will combine datasets of different Eurobarometer survey waves, or make other interventions in the various stages of the survey lifecycle.
+
+```{r dataset-metadata}
+library(dataset)
+ZA5933_sample
+```
+
+
+
+```{r attributes}
+attributes(ZA5933_sample)
+```

@@ -1,0 +1,19 @@
+---
+title: "Harmonize Surveys with Crosswalk Tables"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Harmonize Surveys with Crosswalk Tables}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(eurobarometer)
+```

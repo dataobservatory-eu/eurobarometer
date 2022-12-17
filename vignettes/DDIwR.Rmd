@@ -1,12 +1,11 @@
 ---
-title: "retroharmonize and DDIwR"
+title: "DDI Codebooks with DDIwR"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Working with codebooks}
+  %\VignetteIndexEntry{DDI Codebooks with DDIwR}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
-
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
@@ -15,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup, message=FALSE}
+```{r libraries, message=FALSE}
 library(eurobarometer)
 library(here)
 library(dplyr)
@@ -77,4 +76,3 @@ var_code_table(df = demography, var_name = "d7") %>%
   column_spec(3, border_right = T)  %>%
   column_spec(5, border_right=T)
 ```
-

@@ -1,0 +1,50 @@
+---
+title: "Eurobarometer Question Bank & Basic Code Table"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Eurobarometer Question Bank}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(eurobarometer)
+```
+
+We create a minimal question bank and a codebook for the most important variables of the GESIS Eurobarometer microdata files. These are the variables that are likely to be needed in every harmonization job.
+
+```{r}
+data("eurobarometer_basic_codebook")
+print(eurobarometer_basic_codebook)
+```
+
+## Identification
+
+We place the survey-level metadata, such as the title of the survey, the DOI of the survey file, into a dataset metadata. 
+
+The most important variable that needs to be found is the unique case id for every response.  In more recent Eurobarometers, this is always called `uniqid`.  In older files, it needs to be looked up.  The installed version of `eurobarometer` will contain this crucial information.
+
+## Protocol variables
+
+Our basic codebook contains one metadata variable, the date of the interview. In recent Eurobarometer files, this is the `p1` variable. In earlier files, it maybe necessary to look up this file.
+
+## Weight variables
+
+In recent Eurobarometer files, most, but not all weight variables are consistently named. We locate the two important variables, `w1` (basic post-stratification weight) and `wex` (weight extrapolated on population).
+
+## Basic demography variables
+
+We will include in the basic questionbank, codetable, and we will separately release in processed forms the most important socio-demographic variables.
+
+```{r}
+get_demography_schema()
+```
+
+_A tutorial will follow on how to use them._
