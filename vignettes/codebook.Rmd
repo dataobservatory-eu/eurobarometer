@@ -18,13 +18,85 @@ knitr::opts_chunk$set(
 library(eurobarometer)
 ```
 
+```{r create-codebook-vignette-dir}
+codebook_vignette_dir <- file.path(tempdir(), "codebook_vignette")
+if(!dir.exists(codebook_vignette_dir)) {
+  dir.create(codebook_vignette_dir)
+}
+```
+This code created the _`r codebook_vignette_dir`_ directory.  You can replicate this vignette with the code above, or you can use your own directory for trying the `codebook_create()` function.
+
+The 'eurobarometer' R packagage contains two, very small subsamples of Eurobarometer microdata file. You cannot work in the `system.file()` of the package, so we will copy the contents of this directory to the temporary folder.
+
+```{r check-sytem-fiiles}
+sample_files <- dir(system.file("extdata", package = "eurobarometer"))
+sample_files
+```
+```{r copy-sample-files}
+sytem_file_paths <- file.path(
+  system.file("extdata", package = "eurobarometer"), 
+  dir(system.file("extdata", package = "eurobarometer"))
+  )
+
+for (i in seq_along(sample_files)) {
+  file.copy(sytem_file_paths[i], file.path(codebook_vignette_dir, sample_files[i]), 
+            overwrite=TRUE)
+}
+```
+
+The resulting files can be found here:
+
+```{r show-sample-files}
+sample_files <- file.path(codebook_vignette_dir, dir(codebook_vignette_dir))
+sample_files
+```
+## Create A Survey Codebook
+
+Let's start with `ZA5933_sample.sav`, because it is a better labelled source file.
+
 ```{r read-sav-gesis}
 sample_data <- read_sav_gesis(
-  file = system.file("extdata", "ZA5933_sample.sav",
-                     package = "eurobarometer"))
+  file = sample_files[2])
 ```
+
+Let's see the files contents:
+
+```{r simplified-code-table}
+simple_codebook <- codebook_create(sample_data, val_labels = FALSE, freq = FALSE)
+simple_codebook
+```
+The simplified codebook is returned in a `dataset`, an s3 class of [dataset](https://dataset.dataobservatory.eu/) package that adds important structural and referencial metadata to an R data.frame. 
+
+The `get_zacat_data_url(simple_codebook$ZACAT[1])` command will return the URL of the 
+original dataset, [https://search.gesis.org/research_data/ZA5933](https://search.gesis.org/research_data/ZA5933).
+
+The entire codebook of the sample file would be very large to show, so we subset the `sample_data` and create a more detailed codebook for only the `d25` and `d60` variables.
 
 ```{r codebook}
-codebook_create(sample_data[, c("d25", "d60")], freq = TRUE)
+full_codebook <- codebook_create(sample_data[, c("d25", "d60")], 
+                                 val_labels = TRUE, 
+                                 freq = TRUE)
+full_codebook
 ```
 
+```{r subset-for-d25}
+full_codebook[full_codebook$var_name_orig=="d25", c("val_label_orig")]
+```
+
+
+## Work with Multiple Surveys
+
+```{r codebooks}
+# Create the joint codebook for multiple files
+joint_codebook <- codebook_create(directory = codebook_vignette_dir, 
+                                  val_labels = FALSE, 
+                                  freq = FALSE)
+
+# Create a random row selection
+set.seed(2022)
+random_rows <- c(1, sort(round(runif(11, 2, nrow(joint_codebook)),0)))
+
+# Print only the 12 rows 
+joint_codebook[random_rows, ]
+
+```

@@ -1,5 +1,7 @@
 devtools::load_all()
 gesis_dir <- "/home/antaldaniel/Documents/_data/GESIS"
+
+dir (gesis_dir)
 library(dplyr)
 ZA5933 <- read_sav_gesis(file = file.path(gesis_dir, "ZA5933_v6-0-0.sav"))
 ZA5688 <- read_sav_gesis(file = file.path(gesis_dir, "ZA5688_v6-0-0.sav"))

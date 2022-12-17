@@ -28,6 +28,22 @@ with GESIS.
 
 ## Installation
 
+Because `eurobarometer` is in an early development phase, you cannot
+install it from CRAN with the `install.packages("eurobarometer")`
+command yet. For installing a not-yet-released package, you not only
+need R to be installed on your computer, but must be able to build
+packages from source (those that need compilation of C/C++ or Fortran
+code).  
+- On Ubuntu, you need to install *r-base-dev* with
+`sudo apt-get install r-base-dev`, see [further
+information](https://cran.r-project.org/bin/linux/ubuntu/fullREADME.html). -
+On Windows install the latest version of
+[Rtools](https://cran.r-project.org/bin/windows/Rtools/) - On Mac
+install from Terminal *Xcode* with `xcode-select --install`.
+
+Once you can work with development version packages, run
+`install.packages("devtools")`.
+
 You can install the development version of eurobarometer from
 [GitHub](https://github.com/) with:
 
@@ -35,10 +51,6 @@ You can install the development version of eurobarometer from
 # install.packages("devtools")
 devtools::install_github("dataobservatory-eu/eurobarometer")
 ```
-
-You will also need similarly
-`devtools::install_github("dataobservatory-eu/dataset")` (at least
-version 0.1.9.0004) and the latest version of declared.
 
 ## Work with GESIS survey datasets
 
@@ -94,7 +106,7 @@ library(dataset)
 #> 
 #>     as.data.frame
 ZA5933_sample
-#> Eurobarometer 82.4 (November-December 2014) (subset) (subset) [doi:10.4232/1.13044] 
+#> Eurobarometer 82.4 (November-December 2014) (subset) (subset) [10.4232/1.13044] 
 #> Published by GESIS
 #>      uniqid d25 d25_num                    d25_chr
 #> 1  46001088   2       2 Small or middle sized town
@@ -129,7 +141,7 @@ attributes(ZA5933_sample)
 #> 
 #> $Identifier
 #> $Identifier$doi
-#> [1] "doi:10.4232/1.13044"
+#> [1] "10.4232/1.13044"
 #> 
 #> 
 #> $Publisher
@@ -147,8 +159,8 @@ attributes(ZA5933_sample)
 #> [1] NA
 #> 
 #> $Size
-#> [1] "5.22 kB [5.1 KiB]"
+#> [1] "5.21 kB [5.09 KiB]"
 #> 
 #> $Date
-#> [1] "2022-12-16"
+#> [1] "2022-12-17"
 ```

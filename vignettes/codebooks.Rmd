@@ -1,5 +1,5 @@
 ---
-title: "Working with codebooks"
+title: "retroharmonize and DDIwR"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Working with codebooks}

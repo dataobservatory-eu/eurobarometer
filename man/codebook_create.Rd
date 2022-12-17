@@ -3,9 +3,16 @@
 \name{codebook_create}
 \alias{codebook_create}
 \alias{var_code_table}
+\alias{codebooks_create}
 \title{Create a codebook for a survey or a survey variable}
 \usage{
-codebook_create(df, var_labels = TRUE, val_labels = TRUE, freq = FALSE)
+codebook_create(
+  df,
+  var_labels = TRUE,
+  val_labels = TRUE,
+  freq = FALSE,
+  directory = NULL
+)
 
 var_code_table(
   df,
@@ -14,6 +21,8 @@ var_code_table(
   val_labels = TRUE,
   freq = FALSE
 )
+
+codebooks_create(directory, var_labels = TRUE, val_labels = TRUE, freq = FALSE)
 }
 \arguments{
 \item{df}{A survey dataset}
@@ -27,18 +36,26 @@ Defaults to \code{TRUE}.}
 \item{freq}{Should a label frequency table be included in the codebook?
 Defaults to \code{FALSE.}}
 
+\item{directory}{For multiple surveys, use \code{codebook_create(directory)}
+with placing the survey files into \code{directory}. Defaults to \code{NULL}
+(single data.frame case.)}
+
 \item{var_name}{A variable name in df}
 }
 \value{
 A dataset (data frame) containing the original survey identifier,
-the variable names, the variable and value labels.
+the variable names, the variable and value labels, and further metadata among
+the dataset attributes.
 }
 \description{
 Create a codebook table for a variable or several variables.
 }
 \details{
 Use \code{var_code_table} for a single variable and \code{codebook_create}
-for a dataset.
+for a dataset.\cr
+Use \code{codebook_create(df, ...)} for a survey dataset (or data.frame)\cr
+Use \code{codebook_create(df, directory='my_directory')} for
+multiple surveys in a file directory.\cr
 }
 \examples{
 sample_data <- read_sav_gesis(
@@ -48,3 +65,4 @@ file = system.file("extdata", "ZA5933_sample.sav",
 var_code_table(sample_data, "d7")
 codebook_create(sample_data[, c("d25", "d60")], freq=TRUE)
 }
+\keyword{internal}

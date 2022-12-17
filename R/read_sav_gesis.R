@@ -20,7 +20,12 @@
 #'
 
 read_sav_gesis <- function (file, gesis_study_id = NULL, id_var = NULL) {
+
   # gesis_sav_declared <- DDIwR::convert(file)
+  assertthat::assert_that(file.exists(file),
+                          msg = paste0("read_sav_gesis(file, ....): file = '",
+                                       file, "' does not exist."))
+
   gesis_sav <- haven::read_sav(file)
   gesis_sav_declared <- as.data.frame(lapply(gesis_sav, declared::as.declared))
   zacat_id <- get_gesis_survey_id(file)
@@ -83,7 +88,7 @@ get_gesis_study_id <- function(x) {
 #' @keywords internal
 get_gesis_doi <- function(x, zacat_id=NULL) {
   if ("studyno1" %in% names(x)) {
-    unique(x$doi)
+    gsub("doi:", "", unique(x$doi))
   } else if (!is.null(zacat_id)) {
     row_number <- which(zacat_id %in% eurobarometer_basic_codebook$ZACAT)
     ifelse(length(row_number)==1,

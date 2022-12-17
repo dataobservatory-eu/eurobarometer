@@ -3,5 +3,5 @@ sample_data <- read_sav_gesis(
                      package = "eurobarometer"))
 
 test_that("read_sav_gesis()", {
-  expect_equal(attr(sample_data, "Identifier"), list(doi = "doi:10.4232/1.13044"))
+  expect_equal(attr(sample_data, "Identifier"), list(doi = "10.4232/1.13044"))
 })
